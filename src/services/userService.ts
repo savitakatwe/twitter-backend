@@ -1,12 +1,18 @@
 import User from "../Model/user";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { Jwt_Secret_Key } from "../constant/constant";
 
 class UserService {
   async createUser(textId: string, password: string) {
-    const result = await User.create({
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+    const newUser = await User.create({
       textId: textId,
-      password: password,
+      password: hash,
     });
-    return result;
+    const jwtToken = jwt.sign({ id: newUser._id }, Jwt_Secret_Key);
+    return { jwtToken, newUser };
   }
 }
 export default UserService;
