@@ -13,6 +13,7 @@ const promiseWrapper =
 
 function routes(app: Express) {
   const authController = new AuthController();
-  app.post("/", promiseWrapper(authController.signUp));
+  app.post("/signUp", promiseWrapper(authController.signUp));
+  app.get("/login", promiseWrapper(authController.login));
 }
 export default routes;
