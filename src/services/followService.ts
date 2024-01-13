@@ -20,5 +20,9 @@ class FollowService {
       followUserId: followUserId,
     });
   }
+
+  async getFollowing(userId: string | undefined) {
+    return Follow.find().where({ userId: userId });
+  }
 }
 export default FollowService;

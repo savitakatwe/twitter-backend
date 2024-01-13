@@ -1,10 +1,13 @@
 import { Request } from "express";
 import PostService from "../services/postService";
+import FollowService from "../services/followService";
 class PostController {
   private postService: PostService;
+  private followService: FollowService;
 
   constructor() {
     this.postService = new PostService();
+    this.followService = new FollowService();
   }
 
   createPost = async (req: Request) => {
@@ -18,7 +21,13 @@ class PostController {
 
   getMyFeed = async (req: Request) => {
     const userId = req.userId;
-    return await this.postService.getMyFeed(userId);
+    const following = await this.followService.getFollowing(userId);
+    console.log(following);
+    const userIds = following.map((x) => {
+      return x.followUserId.toString();
+    });
+    userIds.push(userId);
+    return await this.postService.getMyFeed(userIds);
   };
 }
 export default PostController;
