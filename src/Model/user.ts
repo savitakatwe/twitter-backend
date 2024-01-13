@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IUser extends Document {
+export interface IUser extends Document {
   textId: string;
   password: string;
 }

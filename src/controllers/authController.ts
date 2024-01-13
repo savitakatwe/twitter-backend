@@ -18,6 +18,8 @@ class AuthController {
     return await this.userService.createUser(body.textId, body.password);
   };
   login = async (req: Request) => {
+    // @ts-ignore
+    console.log(req.user);
     const body = req.body;
     if (!req.body.textId || !req.body.password) {
       return Promise.reject({ msg: "All fields are required" });

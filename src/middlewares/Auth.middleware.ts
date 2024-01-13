@@ -1,0 +1,20 @@
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import { Jwt_Secret_Key } from "../constant/constant";
+import { IUser } from "../Model/user";
+import mongoose from "mongoose";
+
+// interface IRequestWithAuth extends Request {
+//   userId: mongoose.Types.ObjectId;
+// }
+function authMiddleware(req: Request, res: Response, next: NextFunction) {
+  const token = req.header("Authorization");
+  if (!token) {
+    return res.status(401).json({ error: "Access denied" });
+  }
+  const decoded = jwt.verify(token, Jwt_Secret_Key);
+  // @ts-ignore
+  req.userId = decoded.id;
+  next();
+}
+export default authMiddleware;

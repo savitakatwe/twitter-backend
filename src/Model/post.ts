@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface post extends Document {
+interface IPost extends Document {
   userId: mongoose.Types.ObjectId;
   message: string;
 }
@@ -16,5 +16,5 @@ const postSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-const Post = mongoose.model<post>("post", postSchema);
+const Post = mongoose.model<IPost>("post", postSchema);
 export default Post;

@@ -9,14 +9,16 @@ class PostController {
 
   createPost = async (req: Request) => {
     const body = req.body;
-    //const userId = req.user?.userId;
+    const userId = req.userId;
     if (!req.body.message) {
       return Promise.reject({ msg: "All fields are required" });
     }
-    return await this.postService.createPost(body.message);
+    return await this.postService.createPost(userId, body.message);
   };
 
-  getUserPost() {}
-  getAllPost() {}
+  getMyFeed = async (req: Request) => {
+    const userId = req.userId;
+    return await this.postService.getMyFeed(userId);
+  };
 }
 export default PostController;
