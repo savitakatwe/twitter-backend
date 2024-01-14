@@ -12,17 +12,15 @@ class AuthController {
   }
   signUp = async (req: Request) => {
     const body = req.body;
+
     if (!req.body.textId || !req.body.password) {
       return Promise.reject({ msg: "All fields are required" });
     }
     return await this.userService.createUser(body.textId, body.password);
   };
   login = async (req: Request) => {
-    const body = req.body;
-    if (!req.body.textId || !req.body.password) {
-      return Promise.reject({ msg: "All fields are required" });
-    }
-    return await this.authService.login(body.textId, body.password);
+    const { textId, password } = req.body;
+    return await this.authService.login(textId, password);
   };
 }
 
