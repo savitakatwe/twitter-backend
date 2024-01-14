@@ -21,13 +21,9 @@ class PostController {
 
   getMyFeed = async (req: Request) => {
     const userId = req.userId;
-    const following = await this.followService.getFollowing(userId);
-    console.log(following);
-    const userIds = following.map((x) => {
-      return x.followUserId.toString();
-    });
-    userIds.push(userId);
-    return await this.postService.getMyFeed(userIds);
+    const followingUsers = await this.followService.getFollowings(userId);
+    const userIds = followingUsers.map((x) => x.followUserId.toString());
+    return await this.postService.getMyFeed([userId, ...userIds]);
   };
 }
 export default PostController;

@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-import Post from "../Model/post";
+import Post from "../model/post";
 
 class PostService {
   async createPost(userId: string, message: string) {

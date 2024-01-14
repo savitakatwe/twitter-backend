@@ -18,12 +18,12 @@ function routes(app: Express) {
   const authController = new AuthController();
   const postController = new PostController();
   const followController = new FollowController();
-  app.post("/signUp", promiseWrapper(authController.signUp));
-  // a middleware function with no mount path. This code is executed for every request to the router
 
+  app.post("/signUp", promiseWrapper(authController.signUp));
   app.get("/login", promiseWrapper(authController.login));
   app.use(authMiddleware);
 
+  // Routes after authentication.
   app.post("/post", promiseWrapper(postController.createPost));
   app.get("/getMyFeed", promiseWrapper(postController.getMyFeed));
   app.post("/followUser", promiseWrapper(followController.followUser));

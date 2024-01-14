@@ -1,4 +1,4 @@
-import User from "../Model/user";
+import User from "../model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Jwt_Secret_Key } from "../constant/constant";

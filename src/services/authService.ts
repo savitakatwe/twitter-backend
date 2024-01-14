@@ -1,4 +1,4 @@
-import User from "../Model/user";
+import User from "../model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { Jwt_Secret_Key } from "../constant/constant";
@@ -14,7 +14,6 @@ class AuthService {
       return Promise.reject({ msg: "Incorrect password" });
     }
     const jwtToken = jwt.sign({ id: user._id }, Jwt_Secret_Key);
-    //const { password: userPassword, ...otherData } = user._doc;
     const userObject = user.toJSON();
     const { password: userPassword, ...otherData } = userObject;
     return { jwtToken, user: otherData };

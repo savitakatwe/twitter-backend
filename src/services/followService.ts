@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Follow from "../Model/follow";
+import Follow from "../model/follow";
 
 class FollowService {
   async followUser(
@@ -21,7 +21,7 @@ class FollowService {
     });
   }
 
-  async getFollowing(userId: string | undefined) {
+  async getFollowings(userId: string | undefined) {
     return Follow.find().where({ userId: userId });
   }
 }
