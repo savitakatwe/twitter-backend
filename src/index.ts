@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import routes from "./controllers/routes";
 import { dbConnection } from "./configs/databaseConnections";

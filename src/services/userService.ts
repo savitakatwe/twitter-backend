@@ -1,7 +1,6 @@
 import User from "../model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { Jwt_Secret_Key } from "../constant/constant";
 
 class UserService {
   async createUser(textId: string, password: string) {
@@ -11,7 +10,10 @@ class UserService {
       textId: textId,
       password: hash,
     });
-    const jwtToken = jwt.sign({ id: newUser._id }, Jwt_Secret_Key);
+    const jwtToken = jwt.sign(
+      { id: newUser._id },
+      process.env.Jwt_Secret_Key as string,
+    );
     return { jwtToken, newUser };
   }
 }
