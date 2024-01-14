@@ -1,18 +1,9 @@
-import { Express, Request, Response } from "express";
+import { Express } from "express";
 import AuthController from "./authController";
 import authMiddleware from "../middlewares/Auth.middleware";
 import PostController from "./postController";
 import FollowController from "./followController";
-
-const promiseWrapper =
-  <TRES>(callback: (req: Request) => Promise<TRES>) =>
-  (req: Request, res: Response) => {
-    callback(req)
-      .then((result: TRES) => {
-        res.send(result).status(200);
-      })
-      .catch((err) => res.send(err).status(500));
-  };
+import promiseWrapper from "../helpers/promiseWrapper";
 
 function routes(app: Express) {
   const authController = new AuthController();
