@@ -1,6 +1,5 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import routes from "./controllers/routes";
-import * as mongoose from "mongoose";
 import { dbConnection } from "./configs/databaseConnections";
 import bodyParser from "body-parser";
 
