@@ -3,11 +3,11 @@ import AuthController from "./authController";
 import PostController from "./postController";
 import FollowController from "./followController";
 import promiseWrapper from "../helpers/promiseWrapper";
-import { loginSchema, signUpSchema } from "../validations/auth.validations";
-import { createPostSchema } from "../validations/post.validations";
-import { followSchema } from "../validations/follow.validations";
-import ValidationMiddleware from "../middlewares/Validation.middleware";
-import authMiddleware from "../middlewares/Auth.middleware";
+import { loginSchema, signUpSchema } from "../validations/authValidations";
+import { createPostSchema } from "../validations/postValidations";
+import { followSchema } from "../validations/followValidations";
+import ValidationMiddleware from "../middlewares/validationMiddleware";
+import authMiddleware from "../middlewares/authMiddleware";
 
 function routes(app: Express) {
   const authController = new AuthController();
