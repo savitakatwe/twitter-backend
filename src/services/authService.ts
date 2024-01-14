@@ -14,7 +14,7 @@ class AuthService {
     }
     const jwtToken = jwt.sign(
       { id: user._id },
-      process.env.Jwt_Secret_Key as string,
+      process.env.JWT_SECRET_KEY as string,
     );
     const userObject = user.toJSON();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars

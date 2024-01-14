@@ -6,7 +6,7 @@ function authMiddleware(req: Request, res: Response, next: NextFunction) {
   if (!token) {
     return res.status(401).json({ error: "Access denied" });
   }
-  const decoded = jwt.verify(token, process.env.Jwt_Secret_Key as string) as {
+  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY as string) as {
     id: string;
   };
   req.userId = decoded.id;

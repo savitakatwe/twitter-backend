@@ -12,7 +12,7 @@ class UserService {
     });
     const jwtToken = jwt.sign(
       { id: newUser._id },
-      process.env.Jwt_Secret_Key as string,
+      process.env.JWT_SECRET_KEY as string,
     );
     return { jwtToken, newUser };
   }
