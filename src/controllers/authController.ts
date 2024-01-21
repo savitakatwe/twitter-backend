@@ -13,10 +13,11 @@ class AuthController {
   signUp = async (req: Request) => {
     const body = req.body;
 
-    if (!req.body.textId || !req.body.password) {
-      return Promise.reject({ msg: "All fields are required" });
-    }
-    return await this.userService.createUser(body.textId, body.password);
+    return await this.userService.createUser(
+      body.name,
+      body.textId,
+      body.password,
+    );
   };
   login = async (req: Request) => {
     const { textId, password } = req.body;
