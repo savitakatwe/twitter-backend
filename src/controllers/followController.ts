@@ -7,9 +7,6 @@ class FollowController {
     this.followService = new FollowService();
   }
   followUser = async (req: Request) => {
-    if (!req.body.followUserId) {
-      return Promise.reject({ msg: "All fields are required" });
-    }
     const userId = req.userId;
     return await this.followService.followUser(userId, req.body.followUserId);
   };

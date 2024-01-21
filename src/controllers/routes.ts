@@ -33,6 +33,7 @@ function routes(app: Express) {
     promiseWrapper(postController.createPost),
   );
   app.get("/getMyFeed", promiseWrapper(postController.getMyFeed));
+  app.get("/getUsers", promiseWrapper(authController.getUsers));
   app.post(
     "/followUser",
     ValidationMiddleware(followSchema),

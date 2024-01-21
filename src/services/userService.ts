@@ -1,4 +1,4 @@
-import User from "../model/user";
+import User, { IUser } from "../model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -16,6 +16,10 @@ class UserService {
       process.env.JWT_SECRET_KEY as string,
     );
     return { jwtToken, newUser };
+  }
+  async getUser() {
+    const userArray: IUser[] = await User.find();
+    return userArray;
   }
 }
 export default UserService;

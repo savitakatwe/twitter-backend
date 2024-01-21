@@ -23,6 +23,10 @@ class AuthController {
     const { textId, password } = req.body;
     return await this.authService.login(textId, password);
   };
+
+  getUsers = async () => {
+    return await this.userService.getUser();
+  };
 }
 
 export default AuthController;
