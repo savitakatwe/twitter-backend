@@ -1,8 +1,14 @@
 import User, { IUser } from "../model/user";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { FollowUser } from "../types/FollowUser";
+import FollowService from "./followService";
 
 class UserService {
+  private followService: FollowService;
+  constructor() {
+    this.followService = new FollowService();
+  }
   async createUser(name: string, textId: string, password: string) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
@@ -17,9 +23,22 @@ class UserService {
     );
     return { jwtToken, newUser };
   }
-  async getUser() {
+  async getUser(userId: string): Promise<FollowUser[]> {
     const userArray: IUser[] = await User.find();
-    return userArray;
+    const getFollowing = await this.followService.getFollowings(userId);
+    console.log(getFollowing);
+    return userArray.map((value) => {
+      return {
+        textId: value.textId,
+        name: value.name,
+        // @ts-ignore
+        id: value._id,
+        isFollowing: !!getFollowing.find((followItem) => {
+          // @ts-ignore
+          return followItem.followUserId.toString() === value._id.toString();
+        }),
+      };
+    });
   }
 }
 export default UserService;

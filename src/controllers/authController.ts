@@ -24,8 +24,8 @@ class AuthController {
     return await this.authService.login(textId, password);
   };
 
-  getUsers = async () => {
-    return await this.userService.getUser();
+  getUsers = async (req: Request) => {
+    return await this.userService.getUser(req.userId);
   };
 }
 
