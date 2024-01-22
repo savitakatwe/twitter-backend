@@ -24,9 +24,8 @@ class UserService {
     return { jwtToken, newUser };
   }
   async getUser(userId: string): Promise<FollowUser[]> {
-    const userArray: IUser[] = await User.find({ userid: { $ne: userId } });
+    const userArray: IUser[] = await User.find({ _id: { $ne: userId } });
     const getFollowing = await this.followService.getFollowings(userId);
-    console.log(getFollowing);
     return userArray.map((value) => {
       return {
         textId: value.textId,
